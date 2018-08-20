@@ -1,7 +1,7 @@
 // Action
 
 const START_TIMER = "START_TIMER";
-const RESTART_TIME = "RESTART_TIMER";
+const RESTART_TIMER = "RESTART_TIMER";
 const ADD_SECOND = "ADD_SECOND";
 
 // Action Creators
@@ -42,6 +42,8 @@ function reducer(state = initialState, action) {
       return applyRestartTimer(state);
     case ADD_SECOND:
       return applyAddSecond(state);
+    default:
+      return state;
   }
 }
 
@@ -49,31 +51,31 @@ function reducer(state = initialState, action) {
 
 function applyStartTimer(state) {
   return {
-    ..state,
+    ...state,
     isPlaying: true,
     elapsedTime: 0
-  }
+  };
 }
 
 function applyRestartTimer(state) {
   return {
-    ..state,
+    ...state,
     isPlaying: false,
     elapsedTime: 0
-  }
+  };
 }
 
 function applyAddSecond(state) {
   if (state.elapsedTime < TIMER_DURATION) {
     return {
-      ..state,
+      ...state,
       elapsedTime: state.elapsedTime + 1
-    }
+    };
   } else {
     return {
-      ..state,
+      ...state,
       isPlaying: false
-    }
+    };
   }
 }
 
@@ -83,7 +85,9 @@ const actionCreators = {
   startTimer,
   restartTimer,
   addSecond
-}
+};
+
+export { actionCreators };
 
 // Export Reducer
 
